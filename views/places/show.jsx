@@ -9,9 +9,17 @@ function show (data) {
             <h2>Rating</h2>
             <p>Not Rated</p>
             <img src={data.place.pic} alt="restaurant pic" />
+            <h3>
+              Located in {data.place.city}, {data.place.state}
+            </h3>
             <h2>Description</h2>
-            <p>{ data.place.city}{data.place.state}</p>
             <p>{data.place.cuisines}</p>
+            <h3>
+              {data.place.showEstablished()}
+            </h3>
+            <h4>
+              Serving {data.place.cuisines}
+            </h4>
             <h2>Comments</h2>
             <p>No comments yet</p>
             <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
