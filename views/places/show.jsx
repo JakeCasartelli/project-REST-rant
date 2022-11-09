@@ -41,7 +41,7 @@ function show (data) {
             </h4>
             <h2>Comments</h2>
             <p>{comments}</p>
-            <form method="POST" action={`/places/${data.id}/comment`}>
+            <form method="POST" action={`/places/${data.place.id}/comment`}>
               <div className="form-group">
               <label htmlFor="author">Your Name</label>
               <input className="form-control" id="author" name="author" required />
