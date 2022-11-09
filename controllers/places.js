@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../models')
+const db = require('../models/index')
 
 router.get('/new', (req, res) => {
   res.render('places/new')
@@ -15,6 +15,35 @@ router.get('/', (req, res) => {
       console.log(err) 
       res.render('error404')
     })
+})
+
+
+
+
+
+router.post('/', (req, res) => {
+  db.Place.create(req.body)
+  .then(() => {
+      res.redirect('/places')
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
+})
+
+
+router.get('/:id', (req, res) => {
+  db.Place.findById(req.params.id)
+  .populate('comments')
+  .then(place => {
+      console.log(place.comments)
+      res.render('places/show', { place })
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 router.post('/:id/comment', (req, res) => {
@@ -38,34 +67,6 @@ router.post('/:id/comment', (req, res) => {
   })
 })
 
-
-
-
-router.post('/', (req, res) => {
-  db.Place.create(req.body)
-  .then(() => {
-      res.redirect('/places')
-  })
-  .catch(err => {
-      console.log('err', err)
-      res.render('error404')
-  })
-})
-
-
-router.get('/:id', (req, res) => {
-  const id = req.params.id
-  db.Place.findById(req.params.id)
-  .populate('comments')
-  .then(place => {
-      console.log(place.comments)
-      res.render('places/show', { place })
-  })
-  .catch(err => {
-      console.log('err', err)
-      res.render('error404')
-  })
-})
 
 
 

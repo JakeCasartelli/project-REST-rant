@@ -41,7 +41,25 @@ function show (data) {
             </h4>
             <h2>Comments</h2>
             <p>{comments}</p>
-            <form method="POST" action={`/places/${data.id}/comment`}></form>
+            <form method="POST" action={`/places/${data.id}/comment`}>
+              <div className="form-group">
+              <label htmlFor="author">Your Name</label>
+              <input className="form-control" id="author" name="author" required />
+              </div>
+              <div className= "form-group">
+                <label htmlFor="content">Content</label>
+              <input className="form-control" id="content" name="content" required/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="stars">Stars</label>
+                <input className= "form-control" type="number" id="stars" name="stars" min="1" max="5" step=".5"></input>
+              </div>
+              <div className="form-group">
+                <label htmlFor="rant">Rant</label>
+                <input className= "form-control" type="checkbox" id ="rant" name="rant"  />
+              </div>
+              <button type= "submit" className= "btn btn-primary" value="add comment"></button>
+            </form>
             <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
             Edit
             </a>  
